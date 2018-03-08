@@ -5,6 +5,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
+#include <QLabel>
+#include <QTextEdit>
 
 
 namespace Ui {
@@ -30,9 +32,21 @@ protected:
 
 private:
     bool        mMoveing;
-    QPoint      mMovePosition;
-    QPushButton *btn;
-    QVBoxLayout *vb;
+    QWidget     *m_pLeftWidget;
+    QWidget     *m_pRightWidget;
+    QPoint       mMovePosition;
+    QPushButton *m_pBtnClose;
+    QPushButton *m_pBtnTest;
+
+    QLabel      *m_pLab;
+    QTextEdit   *m_pText;
+    QVBoxLayout *m_pVBLeftLayout;
+    QVBoxLayout *m_pVBRightLayout;
+
+    QHBoxLayout *m_pHBRightTopLayout;
+    QHBoxLayout *m_pHBRightBottomLayout;
+
+
 
 
 };

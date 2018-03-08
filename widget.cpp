@@ -2,88 +2,80 @@
 #include "ui_widget.h"
 #include <QtGui/QMouseEvent>
 #include <QPainter>
-#include <QTextEdit>
+
 
 
 
 Widget::Widget(QWidget *parent) :
     QWidget(parent)
 {
-   //   ui->setupUi(this);
       mMoveing=false;
       setFixedSize(498,340);
       setWindowFlags(Qt::FramelessWindowHint | Qt::WindowMinimizeButtonHint |Qt::WindowStaysOnTopHint);
-     // this->setStyleSheet("QWidget{border:2px solid green;}");
 
 
-      QWidget * left = new QWidget();
-      left->setFixedWidth(115);
-      left->setStyleSheet("background-color:rgb(45 ,45 ,45);");
-      vb  = new QVBoxLayout();
-      vb->addWidget(left);
-      vb->setSpacing(0);
+      m_pLeftWidget = new QWidget();
+      m_pLeftWidget->setFixedWidth(115);
+      m_pLeftWidget->setStyleSheet("background-color:rgb(45 ,45 ,45);");
+      m_pVBLeftLayout  = new QVBoxLayout();
+      m_pVBLeftLayout->addWidget(m_pLeftWidget);
+      m_pVBLeftLayout->setSpacing(0);
 
 
-      QWidget * right = new QWidget();
-      right->setFixedSize(383,26);
-      right->setStyleSheet("background-color:white;");
+      m_pRightWidget = new QWidget();
+      m_pRightWidget->setFixedSize(383,26);
+      m_pRightWidget->setStyleSheet("background-color:white;");
 
-      QVBoxLayout   *vb2  = new QVBoxLayout();
-      QTextEdit *T  = new QTextEdit();
-      T->setFixedSize(359,290);
-      T->setStyleSheet("background-color:white;");
+      m_pVBRightLayout  = new QVBoxLayout();
+      m_pText = new QTextEdit();
+      m_pText->setFixedSize(359,290);
+      m_pText->setStyleSheet("background-color:white;");
 
-      QHBoxLayout *hb1 =new QHBoxLayout();
-      QHBoxLayout *hb2 =new QHBoxLayout();
+      m_pHBRightBottomLayout =new QHBoxLayout();
+      m_pHBRightTopLayout =new QHBoxLayout();
 
-      QLabel *lab = new QLabel("kehuduan");
-      hb2->addWidget(lab);//
-      right->setLayout(hb2);
+      m_pLab = new QLabel("Title");
 
-
-
-
-      hb1->setSpacing(0);
-      hb1->addSpacing(12);
-      hb1->addWidget(T);
-      hb1->addSpacing(12);
-      hb1->addStretch(0);
+      m_pHBRightTopLayout->addWidget(m_pLab);
+      m_pRightWidget->setLayout(m_pHBRightTopLayout);
 
 
-      vb2->addWidget(right);
-      vb2->addSpacing(12);
-      vb2->addLayout(hb1);
-      vb2->addSpacing(12);
-
-      //vb2->addStretch(0);
-     // vb2->addSpacing(12);
-     // vb2->addWidget(T);
-     // vb2->addSpacing(12);
+      m_pHBRightBottomLayout->setSpacing(0);
+      m_pHBRightBottomLayout->addSpacing(12);
+      m_pHBRightBottomLayout->addWidget(m_pText);
+      m_pHBRightBottomLayout->addSpacing(12);
+      m_pHBRightBottomLayout->addStretch(0);
 
 
-      btn = new QPushButton("close");
-      btn->setStyleSheet("background-color:green;");
-      QPushButton  *btn1 = new QPushButton("hehe");
-      btn1->setStyleSheet("background-color:green;");
+      m_pVBRightLayout->addWidget(m_pRightWidget);
+      m_pVBRightLayout->addSpacing(12);
+      m_pVBRightLayout->addLayout(m_pHBRightBottomLayout);
+      m_pVBRightLayout->addSpacing(12);
 
-      QVBoxLayout   *vb3  = new QVBoxLayout();
-      vb3->addWidget(btn);
-      vb3->addWidget(btn1);
-      left->setLayout(vb3);
 
-   QHBoxLayout *hb =new QHBoxLayout();
-   hb->addItem(vb);
-   hb->addItem(vb2);
-   hb->setSpacing(0);
-   hb->setMargin(0);
+      m_pBtnClose = new QPushButton("Close");
+      m_pBtnClose->setStyleSheet("background-color:green;");
+      m_pBtnTest = new QPushButton("Test");
+      m_pBtnTest->setStyleSheet("background-color:green;");
+
+      QVBoxLayout   *m_pVBLayout  = new QVBoxLayout();
+      m_pVBLayout->addWidget(m_pBtnClose);
+      m_pVBLayout->addWidget(m_pBtnTest);
+      m_pLeftWidget->setLayout(m_pVBLayout);
+
+     QHBoxLayout *m_pHBLayout =new QHBoxLayout();
+     m_pHBLayout->addItem(m_pVBLeftLayout);
+     m_pHBLayout->addItem(m_pVBRightLayout);
+     m_pHBLayout->setSpacing(0);
+     m_pHBLayout->setMargin(0);
 
 
 
 
 
-      this->setLayout(hb);
+      this->setLayout(m_pHBLayout);
 
-      connect(btn,SIGNAL(clicked()),this,SLOT(Close()));
+      connect(m_pBtnClose,SIGNAL(clicked()),this,SLOT(Close()));
 
 }
 
