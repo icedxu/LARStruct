@@ -20,3 +20,8 @@ HEADERS  += widget.h \
 
 
 FORMS    += widget.ui
+
+OTHER_FILES +=
+
+RESOURCES += \
+    qss.qrc
